@@ -21,6 +21,12 @@ import {
 } from 'lucide-react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import GetStarted from './pages/GetStarted';
+import GitHubLogin from './pages/GitHubLogin';
+import GoogleLogin from './pages/GoogleLogin';
+import FeaturesPage from './pages/Features';
+import PricingPage from './pages/Pricing';
+import AboutPage from './pages/About';
+import DocsPage from './pages/Docs';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -45,11 +51,10 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-8">
-          {['Features', 'Pricing', 'About', 'Docs'].map((item) => (
-            <a key={item} href={`#${item.toLowerCase()}`} className="text-sm font-medium text-white/60 hover:text-white transition-colors">
-              {item}
-            </a>
-          ))}
+          <Link to="/features" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Features</Link>
+          <Link to="/pricing" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Pricing</Link>
+          <Link to="/about" className="text-sm font-medium text-white/60 hover:text-white transition-colors">About</Link>
+          <Link to="/docs" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Docs</Link>
           <button 
             onClick={() => navigate('/get-started')}
             className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-emerald-400 transition-colors"
@@ -74,11 +79,10 @@ const Navbar = () => {
             className="absolute top-full left-0 right-0 glass mt-2 mx-4 rounded-2xl p-6 md:hidden"
           >
             <div className="flex flex-col gap-4">
-              {['Features', 'Pricing', 'About', 'Docs'].map((item) => (
-                <a key={item} href={`#${item.toLowerCase()}`} className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>
-                  {item}
-                </a>
-              ))}
+              <Link to="/features" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
+              <Link to="/pricing" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
+              <Link to="/about" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+              <Link to="/docs" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -307,19 +311,19 @@ const Footer = () => {
           <div>
             <h4 className="font-bold mb-6 text-sm uppercase tracking-widest">Product</h4>
             <ul className="space-y-4 text-sm text-white/40">
-              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Integrations</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Changelog</a></li>
+              <li><Link to="/features" className="hover:text-white transition-colors">Features</Link></li>
+              <li><Link to="/docs" className="hover:text-white transition-colors">Integrations</Link></li>
+              <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
+              <li><Link to="/docs" className="hover:text-white transition-colors">Changelog</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold mb-6 text-sm uppercase tracking-widest">Company</h4>
             <ul className="space-y-4 text-sm text-white/40">
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Careers</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Press</a></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">Careers</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">Blog</Link></li>
+              <li><Link to="/about" className="hover:text-white transition-colors">Press</Link></li>
             </ul>
           </div>
           <div>
@@ -352,6 +356,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/get-started" element={<GetStarted />} />
+        <Route path="/auth/github" element={<GitHubLogin />} />
+        <Route path="/auth/google" element={<GoogleLogin />} />
+        <Route path="/features" element={<FeaturesPage />} />
+        <Route path="/pricing" element={<PricingPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/docs" element={<DocsPage />} />
       </Routes>
     </BrowserRouter>
   );
