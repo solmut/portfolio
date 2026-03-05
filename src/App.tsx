@@ -110,10 +110,6 @@ const Hero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full glass text-xs font-medium text-emerald-400 mb-6 border border-emerald-500/20">
-            <Sparkles className="w-3 h-3" />
-            V2.0 is now live
-          </span>
           <h1 className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 leading-[0.9]">
             The future of <br />
             <span className="text-emerald-400">digital intelligence.</span>
