@@ -17,7 +17,8 @@ import {
   Twitter, 
   Layers,
   Cpu,
-  Sparkles
+  Sparkles,
+  Check
 } from 'lucide-react';
 import { BrowserRouter, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import GetStarted from './pages/GetStarted';
@@ -27,6 +28,10 @@ import FeaturesPage from './pages/Features';
 import PricingPage from './pages/Pricing';
 import AboutPage from './pages/About';
 import DocsPage from './pages/Docs';
+import ContactPage from './pages/Contact';
+import BlogPage from './pages/Blog';
+import { Privacy, Terms } from './pages/Legal';
+import LuminaAI from './pages/LuminaAI';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,8 +58,12 @@ const Navbar = () => {
         <div className="hidden md:flex items-center gap-8">
           <Link to="/features" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Features</Link>
           <Link to="/pricing" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Pricing</Link>
-          <Link to="/about" className="text-sm font-medium text-white/60 hover:text-white transition-colors">About</Link>
+          <Link to="/blog" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Blog</Link>
+          <Link to="/contact" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Contact</Link>
           <Link to="/docs" className="text-sm font-medium text-white/60 hover:text-white transition-colors">Docs</Link>
+          <Link to="/ai" className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-xs font-bold uppercase tracking-widest hover:bg-emerald-500/20 transition-all">
+            <Sparkles className="w-3 h-3" /> Lumina AI
+          </Link>
           <button 
             onClick={() => navigate('/get-started')}
             className="px-5 py-2 bg-white text-black text-sm font-semibold rounded-full hover:bg-emerald-400 transition-colors"
@@ -81,8 +90,12 @@ const Navbar = () => {
             <div className="flex flex-col gap-4">
               <Link to="/features" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Features</Link>
               <Link to="/pricing" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
+              <Link to="/blog" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Blog</Link>
               <Link to="/about" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>About</Link>
               <Link to="/docs" className="text-lg font-medium text-white/70" onClick={() => setIsMobileMenuOpen(false)}>Docs</Link>
+              <Link to="/ai" className="text-lg font-medium text-emerald-400 flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+                <Sparkles className="w-4 h-4" /> Lumina AI
+              </Link>
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
@@ -124,7 +137,10 @@ const Hero = () => {
             >
               Start Building <ArrowRight className="w-5 h-5" />
             </button>
-            <button className="w-full sm:w-auto px-8 py-4 glass text-white font-semibold rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-2">
+            <button 
+              onClick={() => navigate('/docs')}
+              className="w-full sm:w-auto px-8 py-4 glass text-white font-semibold rounded-2xl hover:bg-white/10 transition-all flex items-center justify-center gap-2"
+            >
               View Documentation
             </button>
           </div>
@@ -154,24 +170,28 @@ const Hero = () => {
   );
 };
 
-const LandingPage = () => (
+const Layout = ({ children }: { children: React.ReactNode }) => (
   <div className="min-h-screen selection:bg-emerald-500/30 selection:text-emerald-400">
     <div className="atmosphere" />
     <Navbar />
-    <main>
-      <Hero />
-      <Stats />
-      <Features />
-      
-      {/* CTA Section */}
-      <section className="py-20 md:py-32">
-        <div className="max-w-5xl mx-auto px-6">
-          <CTASection />
-        </div>
-      </section>
-    </main>
+    <main>{children}</main>
     <Footer />
   </div>
+);
+
+const LandingPage = () => (
+  <>
+    <Hero />
+    <Stats />
+    <Features />
+    
+    {/* CTA Section */}
+    <section className="py-20 md:py-32">
+      <div className="max-w-5xl mx-auto px-6">
+        <CTASection />
+      </div>
+    </section>
+  </>
 );
 
 const CTASection = () => {
@@ -190,7 +210,10 @@ const CTASection = () => {
           >
             Get Started Now <ChevronRight className="w-5 h-5" />
           </button>
-          <button className="w-full sm:w-auto px-10 py-5 bg-black/10 text-black font-bold rounded-2xl hover:bg-black/20 transition-all">
+          <button 
+            onClick={() => navigate('/contact')}
+            className="w-full sm:w-auto px-10 py-5 bg-black/10 text-black font-bold rounded-2xl hover:bg-black/20 transition-all"
+          >
             Contact Sales
           </button>
         </div>
@@ -198,7 +221,6 @@ const CTASection = () => {
     </div>
   );
 };
-
 const FeatureCard = ({ icon: Icon, title, description, delay }: { icon: any, title: string, description: string, delay: number }) => (
   <motion.div
     initial={{ opacity: 0, y: 20 }}
@@ -310,15 +332,16 @@ const Footer = () => {
               <li><Link to="/features" className="hover:text-white transition-colors">Features</Link></li>
               <li><Link to="/docs" className="hover:text-white transition-colors">Integrations</Link></li>
               <li><Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
-              <li><Link to="/docs" className="hover:text-white transition-colors">Changelog</Link></li>
+              <li><Link to="/blog" className="hover:text-white transition-colors">Journal</Link></li>
+              <li><Link to="/ai" className="hover:text-white transition-colors">Lumina AI</Link></li>
             </ul>
           </div>
           <div>
             <h4 className="font-bold mb-6 text-sm uppercase tracking-widest">Company</h4>
             <ul className="space-y-4 text-sm text-white/40">
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
+              <li><Link to="/contact" className="hover:text-white transition-colors">Contact</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">Careers</Link></li>
-              <li><Link to="/about" className="hover:text-white transition-colors">Blog</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">Press</Link></li>
             </ul>
           </div>
@@ -337,8 +360,8 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row items-center justify-between pt-8 border-t border-white/5 text-xs text-white/30">
           <p>© 2024 Lumina Technologies Inc. All rights reserved.</p>
           <div className="flex gap-8 mt-4 md:mt-0">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
+            <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           </div>
         </div>
       </div>
@@ -350,14 +373,19 @@ export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        <Route path="/" element={<Layout><LandingPage /></Layout>} />
         <Route path="/get-started" element={<GetStarted />} />
         <Route path="/auth/github" element={<GitHubLogin />} />
         <Route path="/auth/google" element={<GoogleLogin />} />
-        <Route path="/features" element={<FeaturesPage />} />
-        <Route path="/pricing" element={<PricingPage />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/features" element={<Layout><FeaturesPage /></Layout>} />
+        <Route path="/pricing" element={<Layout><PricingPage /></Layout>} />
+        <Route path="/about" element={<Layout><AboutPage /></Layout>} />
         <Route path="/docs" element={<DocsPage />} />
+        <Route path="/contact" element={<Layout><ContactPage /></Layout>} />
+        <Route path="/blog" element={<Layout><BlogPage /></Layout>} />
+        <Route path="/privacy" element={<Layout><Privacy /></Layout>} />
+        <Route path="/terms" element={<Layout><Terms /></Layout>} />
+        <Route path="/ai" element={<LuminaAI />} />
       </Routes>
     </BrowserRouter>
   );

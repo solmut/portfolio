@@ -51,9 +51,7 @@ const FeatureSection = ({ title, subtitle, items }: { title: string, subtitle: s
 
 const Features = () => {
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-32">
-      <div className="atmosphere opacity-30" />
-      
+    <div className="pt-32">
       <div className="max-w-7xl mx-auto px-6 mb-20">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

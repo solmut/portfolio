@@ -20,6 +20,7 @@ import {
   Copy,
   Check
 } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const SidebarItem = ({ title, items, activeItem, setActiveItem }: { title: string, items: string[], activeItem: string, setActiveItem: (s: string) => void }) => (
   <div className="mb-8">
@@ -84,9 +85,14 @@ const Docs = () => {
 
       {/* Sidebar */}
       <aside className={`fixed inset-0 z-40 md:relative md:z-0 md:w-80 bg-[#050505] border-r border-white/5 p-8 overflow-y-auto transition-transform md:translate-x-0 ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}>
-        <div className="hidden md:flex items-center gap-2 mb-12">
-          <Zap className="w-6 h-6 text-emerald-400 fill-current" />
-          <span className="text-xl font-bold tracking-tight">Lumina Docs</span>
+        <div className="hidden md:flex items-center justify-between mb-12">
+          <div className="flex items-center gap-2">
+            <Zap className="w-6 h-6 text-emerald-400 fill-current" />
+            <span className="text-xl font-bold tracking-tight">Lumina Docs</span>
+          </div>
+          <Link to="/" className="text-[10px] font-bold uppercase tracking-widest text-white/30 hover:text-white transition-colors">
+            Back to Site
+          </Link>
         </div>
 
         <div className="relative mb-8">

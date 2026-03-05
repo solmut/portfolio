@@ -67,9 +67,7 @@ const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(false);
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-32 pb-20">
-      <div className="atmosphere opacity-30" />
-      
+    <div className="pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="text-center mb-20">
           <motion.div

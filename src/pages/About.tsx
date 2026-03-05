@@ -18,6 +18,7 @@ import {
   Twitter,
   Linkedin
 } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const TeamMember = ({ name, role, image, delay }: { name: string, role: string, image: string, delay: number }) => (
   <motion.div
@@ -51,10 +52,9 @@ const TeamMember = ({ name, role, image, delay }: { name: string, role: string, 
 );
 
 const About = () => {
+  const navigate = useNavigate();
   return (
-    <div className="min-h-screen bg-[#050505] text-white pt-32 pb-20">
-      <div className="atmosphere opacity-30" />
-      
+    <div className="pt-32 pb-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Hero Section */}
         <div className="text-center mb-32">
@@ -171,10 +171,16 @@ const About = () => {
               We're always looking for talented individuals who are passionate about AI and the future of the web.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 relative z-10">
-              <button className="w-full sm:w-auto px-10 py-5 bg-emerald-500 text-black font-bold rounded-2xl hover:scale-105 transition-transform flex items-center justify-center gap-2">
+              <button 
+                onClick={() => navigate('/get-started')}
+                className="w-full sm:w-auto px-10 py-5 bg-emerald-500 text-black font-bold rounded-2xl hover:scale-105 transition-transform flex items-center justify-center gap-2"
+              >
                 View Openings <ArrowRight className="w-5 h-5" />
               </button>
-              <button className="w-full sm:w-auto px-10 py-5 glass text-white font-bold rounded-2xl hover:bg-white/10 transition-all">
+              <button 
+                onClick={() => navigate('/contact')}
+                className="w-full sm:w-auto px-10 py-5 glass text-white font-bold rounded-2xl hover:bg-white/10 transition-all"
+              >
                 Contact Us
               </button>
             </div>

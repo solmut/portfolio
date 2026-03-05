@@ -229,7 +229,7 @@ const GetStarted = () => {
         </div>
 
         <div className="mt-auto pt-12 text-center text-xs text-white/20">
-          <p>By signing up, you agree to our <a href="#" className="underline hover:text-white">Terms of Service</a> and <a href="#" className="underline hover:text-white">Privacy Policy</a>.</p>
+          <p>By signing up, you agree to our <Link to="/terms" className="underline hover:text-white">Terms of Service</Link> and <Link to="/privacy" className="underline hover:text-white">Privacy Policy</Link>.</p>
         </div>
       </div>
     </div>
